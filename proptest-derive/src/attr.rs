@@ -608,12 +608,7 @@ fn normalize_meta(meta: Meta) -> Option<NormMeta> {
             if let Some(nm) = util::match_singleton(ml.nested) {
                 match nm {
                     NestedMeta::Lit(lit) => NormMeta::Lit(lit),
-                    NestedMeta::Meta(Meta::Path(path)) => {
-                        match path.get_ident() {
-                            Some(word) => NormMeta::Word(word.to_owned()),
-                            None => return None,
-                        }
-                    }
+                    NestedMeta::Meta(Meta::Path(path)) => NormMeta::Path(path),
                     _ => return None,
                 }
             } else {
